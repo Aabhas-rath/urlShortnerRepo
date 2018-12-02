@@ -1,0 +1,73 @@
+﻿@model CutURL.Models.URLModel
+
+@{
+    ViewBag.Title= "Cut URL Home";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="jumbotron">
+                <h1>CUT your URL here</h1>
+                <p class="lead">Shorten your url here</p>
+            </div>
+        </div>
+    </div>
+    @Html.ValidationSummary();
+    @using (Html.BeginForm())
+    {
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    @Html.TextBoxFor(Model => Model.OriginalURL, new { placeholder = "Orignal URL", @class = "form-control" })
+                </div>
+                <br />
+                <div class="form-group">
+                    @Html.TextBoxFor(Model => Model.CustomURL, new { placeholder = "Custom URL", @class = "form-control" })
+                </div>
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+        <div class="row">
+            <div class=" col-md-8">
+            </div>
+            <div class="col-md-4">
+                <input id="Submit1" type="submit" value="Cut It" class="btn btn-primary" />
+            </div>
+        </div>
+    }
+    @if (!string.IsNullOrEmpty(Model.ShortURL))
+    {
+        using (Html.BeginForm("ShowStats", "UrlShortner"))
+        {
+            <br/>
+            <div class="row">
+                <div class="col-md-5">
+
+                    <div>
+                        <h4><a href="@Model.ShortURL" target="_blank">@Model.ShortURL</a></h4>
+                        @{ string value = Model.ShortURL.Substring(Model.ShortURL.LastIndexOf('/')+1);}
+                        <input type="hidden" name="segment" value="@value" />
+                    </div>    
+                </div>
+                <div class="col-lg-2"></div>
+                <div class="col-md-3">
+                </div>
+                <div class="col-md-2">
+                    <input id="Submit2" type="submit" value="Show Statistics" class="btn btn-primary" />
+                </div>
+
+            </div>
+        }
+    }
+    </body>
+</html>

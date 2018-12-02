@@ -1,0 +1,56 @@
+﻿@model CutURL.Entities.URLDetails
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ShowStats</title>
+</head>
+<body>
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <h2 style="align-self:center;align-content:center;" class="lead"><a href=@Model.OrignalUrl>@Model.OrignalUrl</a></h2>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+    <div class="row active">
+        <div class="col-md-2">
+            <h4 style="align-self:center;align-content:center;" class="lead">Created on</h4>
+        </div>
+        <div class="col-md-2">
+            <h4 style="align-self:center;align-content:center;" class="lead">@Model.CreatedOn.ToString()</h4>
+        </div>
+
+        <div class="col-md-2">
+            <h4 style="align-self:center;align-content:center;" class="lead">Clicks Occured</h4>
+        </div>
+        <div class="col-md-2 ">
+            <h4 style="align-self:center;align-content:center;" class="lead">@Model.ClickCounter</h4>
+        </div>
+        <div class="col-md-2">
+            <h4 style="align-self:center;align-content:center;" class="lead">IP Used for creation</h4>
+        </div>
+        <div class="col-md-2">
+            <h4 style="align-self:center;align-content:center;" class="lead">@Model.Ip</h4>
+        </div>
+    </div>
+    @if (Model.statistics != null)
+    {
+        foreach (var item in Model.statistics)
+        {
+            <div class="row active">
+                <div class="col-md-3"></div>
+                <div class="col-md-3"><h5 style="align-self:center;align-content:center;" class="lead">Clicked On</h5></div>
+                <div class="col-md-3"><h5 style="align-self:center;align-content:center;" class="lead">@item.ClickDate.ToString()</h5></div>
+                <div class="col-md-3"></div>
+            </div>
+        }
+    }
+</body>
+</html>
